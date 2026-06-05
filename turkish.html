@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Turkish Comedy</title>
+
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body onload="showTurkishComedy()">
+
+  <div class="bg"></div>
+  <div class="overlay"></div>
+
+  <header class="navbar">
+
+    <h1>CINEMA WORLD</h1>
+
+    <nav>
+
+      <a href="index.html">Home</a>
+      <a href="turkish.html">Turkish Comedy</a>
+      <a href="saved.html">Saved Movies</a>
+      <a href="payment.html">Payment</a>
+      <a href="contact.html">Contact</a>
+      <a href="login.html">Login</a>
+
+    </nav>
+
+  </header>
+
+<!--აქ არის გვერდის მთავარი content JavaScript-ი დაემადებს ფილმებს-->
+  <main>
+
+    <!--ეს არის popup ფანჯარა-->
+    <div class="modal" id="movieModal">
+
+      <!--<div> კონტეინერი, რომელიც გამოიყენება modal (popup) ფანჯრის შიგთავსისთვის-->
+  <div class="modal-content">
+    
+    <!--დახურვის ღილაკი-->
+    <span class="close" onclick="closeMovie()">
+      &times;
+    </span>
+
+    <!--ქ ირთვება ფილმის ვიდეო-->
+    <iframe
+      id="moviePlayer"
+      width="100%"
+      height="500"
+      allowfullscreen>
+    </iframe>
+
+  </div>
+
+</div> 
+
+
+    <section class="hero">
+
+      <h2> Turkish Comedy Movies</h2>
+
+    </section>
+   
+    <!--აქ JavaScript დაამატებს ფილმებს-->
+    <section class="grid" id="movieGrid"></section> 
+
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    //როცა გვერდი სრულად ჩაიტვირთება, ავტომატურად გაუშვი showTurkishComedy ფუნქცია
+   document.addEventListener("DOMContentLoaded", showTurkishComedy);
+   </script>
+
+</body>
+</html>

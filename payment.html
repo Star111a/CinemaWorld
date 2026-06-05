@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Payment</title>
+
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+  <div class="bg"></div>
+  <div class="overlay"></div>
+
+  <header class="navbar">
+
+    <h1>CINEMA WORLD</h1>
+
+    <nav>
+
+      <a href="index.html">Home</a>
+      <a href="turkish.html">Turkish Comedy</a>
+      <a href="saved.html">Saved Movies</a>
+      <a href="payment.html">Payment</a>
+      <a href="contact.html">Contact</a>
+      <a href="login.html">Login</a>
+
+    </nav>
+
+  </header>
+
+  <main>
+    <!--ეს ბლოკი აწყობს ფორმას ლამაზად-->
+    <section class="form-section">
+
+      <!--მომხმარებელი აქ ავსებს მონაცემებს-->
+      <form class="payment-form">
+
+        <!--აჯგუფებს input-ებს ერთად, ვიზუალურადაც ერთ ყუთში აჩვენებს-->
+        <fieldset>
+
+          <label for="fullname">
+            Full Name
+          </label>
+
+          <input
+            type="text"
+            id="fullname"
+            name="fullname"
+            placeholder="Enter your full name"
+          >
+
+          <label for="email">
+            Email
+          </label>
+
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Enter your email"
+          >
+
+          <label for="card">
+            Card Number
+          </label>
+
+          <input
+            type="text"
+            id="card"
+            name="card"
+            placeholder="XXXX XXXX XXXX XXXX"
+          >
+
+          <!--ეს ღილაკი აგზავნის ფორმას-->
+          <button type="submit">
+            Pay Now
+          </button>
+
+        </fieldset>
+
+      </form>
+
+    </section>
+
+  </main>
+
+</body>
+</html> 

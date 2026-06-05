@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">     <!-- სიმბოლების გამოყენებისთვის-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <!-- თელეფონში გახსნისდროს -->
+
+  <title>Cinema World</title>   
+
+  <link rel="stylesheet" href="style.css">  <!--სხვა css ფაილს აგავშირებს-->
+
+</head>
+
+<body onload="showHome()">   <!-- გვერდის ძირითადი ხილული ნაწილი-->
+
+  <div class="bg"></div>    <!-- ცარიელი div  ფონისთვის,  css-ით შეიძლება დაემადოს სურათი ან ეფექდი-->
+  <div class="overlay"></div>   <!-- ფონის ზედა შრე(დამუქებისთვის და გამჭვირვალებისთვის)-->
+
+  <header class="navbar">   <!--ნავიკაცია ზედა ნაწილი-->
+
+    <h1>CINEMA WORLD</h1>     <!--მთავარი სათაური-->
+
+    <nav>  <!-- მენიუს ნავიგაცია--> 
+
+      <a href="index.html">Home</a>
+      <a href="turkish.html">Turkish Comedy</a>
+      <a href="saved.html">Saved Movies</a>
+      <a href="payment.html">Payment</a>
+      <a href="contact.html">Contact</a>
+      <a href="login.html">Login</a>
+    
+
+    </nav>
+
+  </header>
+
+  <main>   <!-- გვერდის მთავარი კონტენტი-->
+
+    <section class="hero">   <!--Hero სექცია — მთავარი მისასალმებელი ნაწილი-->
+
+      <h2>Welcome to Cinema World</h2>  <!--ქვედა სათაური -->
+     <!-- ძებნის არე -->
+      <!--type="text" -- ტექსდის შესაყვანად    
+        id="search"  -- JavaScript ამ ელემენდს ID-ის მიხედვით ფოულობს      
+        placeholder="Search movies..."  -- ცარიელ ადგილში გამოჩნდება    
+        onkeyup="searchMovies()" -- searchMovies() ფუნქცია მუშაობს ყოველ ჯერზე როდესაც ღილაკს ათავისულებთ 
+        უყურებთ ფილმებს რომლებისც შეესაბამება დაწერილ ტექსტს -->  
+      <input  
+        type="text"   
+        id="search"           
+        placeholder="Search movies..."    
+        onkeyup="searchMovies()"    
+      >
+
+    </section>
+
+    <section class="grid" id="movieGrid"></section>   <!--ფილმების გამოსაჩენი ნაწილი, grid - CSS Grid დიზაინი. id="movieGrid"-JavaScript აქ დაამატებს ფილმებს-->
+<!-- მაგალითად 
+  <div class="movie-card">
+  <img src="poster.jpg">
+  <h3>Movie Name</h3>
+</div>-->
+  </main>
+
+  <footer>   <!--კვერდის ქვედა ნაწილი-->
+
+    <p>© 2026 Cinema World</p>
+
+  </footer>
+
+  <div class="modal" id="movieModal">   <!--Modal ფანჯრის დასაწყისი,გამოიყენება ფილმის popup ფანჯრისთვის, ფანჯარა ანუ იხსნება ფილმზე  დაწკაპუნებისას-->
+
+    <div class="modal-content">  <!--Modal-ის შიდა კონტენტი-->
+
+      <span class="close" onclick="closeMovie()">  <!--დახურვის ღილაკი-->
+        &times;
+      </span>
+<!--ვიდეოს გახსნისთვის-->
+      <iframe   
+        id="moviePlayer"
+        width="100%"
+        height="500"
+        allowfullscreen>
+      </iframe>
+
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>   <!--აკავშირებს JavaScript ფაილს (showHome(), searchMovies(), closeMovie())-->
+
+</body>
+</html>

@@ -1,0 +1,726 @@
+
+*{
+  margin:0;   /* აშორებს გარე დაშორებებს */
+  padding:0;  /* აშორებს შიდა დაშორებებს */
+  box-sizing:border-box;   /* ზომებს მართვას ამარტივებს  */
+  font-family:Arial,sans-serif;  /* მთელ საიტზე Arial ფონტი გამოიყენება */
+}
+
+body{
+  background:#000000;   /*  ფონი მუქი ლურჯია */
+  color:rgb(255, 255, 255);    /* ტექსდის ფერია */
+  overflow-x:hidden;   /* ჰორიზონტალური  scroll იკრძალება */
+}
+  /*ფონის სურათი */
+.bg{     /* მთელი ეკრანზე ბლური ფონის ეფექტი ქმნის */
+  position:fixed;    /* ელემენდი ეკრანზე სდაბილურია არ მოწრაობს*/
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:url('https://www.postifull.com.tr/cdn/shop/files/film-posterleri-duvar-posteri-kolaj-seti-50-adet-arkasi-yapiskanli-10cm-15cm-kutulu-set-33080.jpg?v=1754836755&width=1200');
+  background-size:cover;  /*სურათი ეკრანის ზომაზეა საჯიროების შემთხვევაში სურათი შეიძლება შემცირდეს*/
+  background-position:center; /*ეკრანის ზომის ცვლის დროს სურათის მთავარი ნაწილი რჩება */
+  filter:blur(10px);  /*ბლურის ეფექდი*/
+  transform:scale(1.1);  /*სურათს გადიდებს 110% */
+  z-index:-2;  /*ფონი ელემენდების უკან რჩება */
+}
+
+
+/* ფონის სურათზე ამადებს გამჯვირვალე ფენას რომ ტექსდი გარგათ გამოჩნდეს */
+.overlay{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:rgba(223, 159, 200, 0.75);
+  z-index:-1;
+}
+
+/* საიტის ზედა მენიუს ერთ ხაზზე აწყობს , ყველა HTML ელემენტი, რომელსაც აქვს class="navbar", ამ სტილებს მიიღებს*/
+.navbar{
+  width:100%;     /*navbar ეკრანის მთლიან სიგანეს იკავებს */
+  display:flex;       /*ელემენტებს (ლოგო + მენიუ) ერთ ხაზზე აწყობს*/
+  justify-content:space-between;  /*ელემენდებს ალაგებს მარცნიდან მარჯნამდე და აშორებს ერთმანეთდან*/
+  align-items:center;     /*ელემენდებს ვერტიკალურად ცენდრში აყენებს*/
+  padding:20px 60px;      /*შიდა დაშორება და მარჯვ-მარცხ დაშორ*/
+  background:rgba(97, 15, 96, 0.2);
+  position:sticky;        /* scroll-ის დროს navbar ზედა ნაწილში რჩება.*/
+  top:0;                 /*sticky navbar ზუსტად ზედა ნაწილზე ჩერდება*/
+  z-index:1000;         /*navbar სხვა ელემენტების ზემოთ გამოჩნდეს*/
+  backdrop-filter:blur(10px);   /*ბლურ ეფექდს ქმნის*/
+}
+
+.navbar h1{          /* navbar-ში არსებული h1-ის სტილია*/
+  color:rgb(72, 10, 90);    /*სათაურის ფერი*/
+  font-size:32px;    /*ტესტს ადიდებს*/
+}
+
+.navbar h1::after{
+  content:" 🍿 ";
+}
+
+.navbar nav{  /*მენიუს ლინკებს ერთ ხაზზე აწყობს და დაშორებს ერთმანეთისგან*/
+  display:flex;
+  gap:25px;
+}
+
+.navbar nav a{   /*  navbar-ში ლინკების დალაგება და ფერი*/
+  text-decoration:none;   /* ლინკებს underline-ს აშორებს*/
+  color:rgb(74, 10, 90);
+  font-size:18px; /*ტექსდის ზომა*/
+  transition:0.3s;   /*hover ეფექტს smooth-ს ხდის*/
+}
+
+.navbar nav a:hover{   /* ლინკზე მაუსის მიტანისას ლურჯდება */
+  color:rgb(150, 203, 218);
+}
+
+.hero{   /* მთავარი ბანერია  შეიცავს დიდ სათაურს, აღწერას, საძიებო ველს*/
+  text-align:center;
+  padding:80px 20px 50px;
+
+  background:linear-gradient(  /*ქმნის ვარდისფერიდან შავში გადასვლის ეფექტს */
+    rgb(223, 159, 200, 0.75),
+    rgb(0, 0, 0)
+  );
+
+  border-radius:20px;  /*კუთხებს ამრგვალებს*/
+  margin:20px;   /*Hero section-ს გარედან სივრცეს აძლევს.*/
+}
+
+.hero h2{    /*მთავარი სათაურის გადიდება.*/
+  font-size:55px;
+  margin-bottom:15px;  /*სატაურის ქვემოთ დაშორება*/
+}
+ 
+  
+/* ქმნის ოვალურ საძიებო ველს */
+#search{
+  width:350px;
+  max-width:90%; /*ელემენდის მაქ ზომა*/
+  padding:15px;  /*შიდა დაშორება ელემენდების გვერდებთან */
+  border:none;  /*ზღვარის ფორმა არ არის */
+  border-radius:40px;
+  outline:none;   /*focus-ის დროს outline ქრება ანუ ელემენდის არჩევის დროს ბრაიზერში არ ჩანდება searc-ი */
+  font-size:16px;
+  background:#1c0b1a;
+  color:white;
+  border:2px solid rgb(74, 10, 90);    /* ამატებს ის-ფერი border-ს. */
+}
+
+/* ფილმების ბარათებს grid ფორმატში აწყობს */
+.grid{
+  display:grid;
+  /* responsive სისტემაა:დიდ ეკრანზე მეტი სვეტი ჩანს, პატარა ეკრანზე ავტომატურად მცირდება*/
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:25px;  /*ბარათებს შორის დაშორება.*/
+  padding:40px;  /*შიდა სივრცე*/
+}
+
+/* ქმნის ფილმის ბარათის დიზაინს */
+.card{
+  background:#1c0b1a;
+  border-radius:15px;  /*გვერდებს ამრგვალებს */
+  overflow:hidden;   /*შიგნით არსებული ელემენტი ზომას გადააჭარბებს, დამალული იქნება,არ ჩანდება*/
+  transition:0.3s;  /*ყველა ცვლილება მაგ. hover 0.3 წამში შესრულდება*/
+  box-shadow:0 5px 15px rgba(4, 4, 4, 0.5);  /*ბარათის ქვედა ნაწილში ჩრდილს აძლევს*/
+  animation:fadeIn 1s ease;   /*გვერდის ჩატვირთვისას გამოჩენის ანიმაცია ემატება*/
+}
+
+/*მაუსის მიტანისას: ზემოთ იწევა, ოდნავ იზრდება;
+translateY(-10px) → ბარათი 10px-ით ზემოთ იწევა
+scale(1.03) → ბარათი 3%-ით იზრდება*/
+.card:hover{
+  transform:translateY(-10px) scale(1.03);
+}
+
+/*სურათებს სწორად ათავსებს*/
+.card img{
+  width:100%;
+  height:320px;
+  object-fit:cover;  /*სურათი პროპორციებს ინარჩუნებს და საჭიროების შემთხვევაში იჭრება*/
+}
+
+.movie-info{
+  padding:15px;
+  text-align:center; 
+}
+
+.movie-info h3{  /* ფილმის სათაურის ინფორმაცია */
+  margin-bottom:10px;  /*ქვემოთ დაშორებს*/
+  font-size:22px;  /*შრიფდის ზომა*/
+}
+
+ /* ფილმების შესახებ ინფორმაციის ფერისთვის*/
+.movie-info p{
+  color:#9cd4eb;
+  margin-bottom:15px;
+}
+
+
+/* ორივეს სტილი */
+.watch-btn,
+.save-btn{
+  width:100%;
+  border:none;
+  padding:6px 20px;
+  border-radius:30px;
+  color:rgb(0, 100, 150);
+  cursor:pointer;  /*მაუსი გადაიქცევა ხელის ნიშნად*/
+  font-size:15px;
+  transition:0.3s;  /*ეფექდის ანიმაცია */
+}
+
+.watch-btn{
+  background:rgb(140, 229, 237);
+}
+
+.watch-btn:hover{  /*მაუსის მიტანისას ვარდისფერი ხდება*/
+  background:rgb(226, 156, 227);
+}
+
+.save-btn{
+  margin-top:10px; /*ზემოთ დაშორებს */
+  background:#e688e8;
+}
+
+.save-btn:hover{
+  background:#8dbbe7;
+}
+
+/*წაშლის ღილაკი*/
+.remove-btn{
+  width:100%;
+  border:none;
+  margin-top:10px;
+  padding:6px 20px;
+  border-radius:30px;
+  color:white;
+  cursor:pointer;
+  font-size:15px;
+  transition:0.3s;
+  background:rgb(60, 137, 179);
+}
+
+.remove-btn:hover{
+  background:rgb(133, 198, 245);
+}
+
+/*საწყისში დამალულია.
+შემდეგ JavaScript-ით იხსნება.
+გამოიყენება popup/video trailer-ისთვის.*/
+
+.modal{
+  position:fixed;  /*ეკრანზე ფიკსირდება */
+  top:0;  /*იწყება ზედა მარცხენა კუთხიდან*/
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgb(223, 159, 200, 0.75);
+  display:none;  /*გამჯვირვალე ვარდისფერი ფონი*/
+  justify-content:center; /*შიგთავსი ცენდრში განთავსდება*/
+  align-items:center;
+  z-index:9999; /*ყველა ელემენდი ზემოთ გამოჩნდება */
+  padding:20px;
+}
+
+.modal-content{ /*შიგნით არსებული ელემენტების პოზიციონირებისთვის გამოიყენება*/
+  width:90%;
+  max-width:900px;
+  position:relative;
+}
+
+.close{
+  position:absolute;  /*თავისულად განლაგდება*/
+  top:-50px; /*მარჯვენა ზედა მხარე*/
+  right:0;
+  color:rgb(119, 40, 40);
+  font-size:40px;
+  cursor:pointer; /*დაჯერადია */
+}
+
+/*form-ი შუაში რჩება */
+.form-section{
+  display:flex;
+  justify-content:center;
+  padding:60px 20px;
+}
+
+/*გადახდის ფორმის დიზაინი
+input-ებს, button-ს, fieldset-ს */
+.payment-form{
+  width:100%;
+  max-width:500px;
+}
+
+/*ფორმის გარემოს ჩარჩოს ქმნის*/
+fieldset{
+  border:4px solid rgb(74, 10, 90);
+  padding:30px;
+  border-radius:20px;
+  background:rgba(37, 14, 32, 0.8);
+}
+
+
+
+.payment-form label{    /*ლეიბელის სდილი*/
+  display:block;        /*თითოეული label ახალ ხაზზე გამოჩნდება*/
+  margin-top:15px;       /*ზედა დაშორება*/   
+  margin-bottom:5px;     /* ქვედა დაშორება */
+}
+
+
+/*შეყვანილი ყველა ელემენტი ამ ფორმაზეა*/
+.payment-form input{
+  width:100%;
+  padding:15px;
+  border:none;   /*საზღვარი არ აქვს*/
+  border-radius:10px;
+  margin-bottom:15px;
+}
+
+.payment-form button{
+  width:100%;
+  padding:15px;
+  background:rgb(255,0,0,0.4);
+  color:white;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+  transition:0.3s;   /*ფერის ცვლილება ხდება რბილად 0.3 წამში*/
+}
+
+  /*ღილაკზე მაუსის მიდანისას დამუქდება*/
+.payment-form button:hover{
+  background:darkred;
+}
+
+
+/*ეს CSS კოდი .empty-message კლასის მქონე ელემენტს აძლევს სტილს: მონაცემების ფერი ზომა და მისამართი*/
+.empty-message{
+  text-align:center;
+  width:100%;
+  color:rgb(255, 253, 253);
+}
+
+
+/*ქვედა ნაწილის გასწორება.*/
+footer{
+  text-align:center;
+  padding:20px;
+  background:rgba(0, 0, 0, 0.8);
+  margin-top:40px;
+}
+
+
+/*ტექსტის მონიშვნისას წითლად ჩანს*/
+::selection{
+  background:rgb(63, 62, 62);
+  color:white;
+}
+
+
+/*ბარათების გამოჩენის ანიმაცია, ელემენდი ნელა ჩნდება*/
+@keyframes fadeIn{
+
+  /*საწყისი მდგომარეობა*/
+  from{  
+    opacity:0;  /*ელემენდი არ ჩანს*/
+    transform:translateY(20px);   /*ელემენტი ქვემოდან იწყებს*/
+  }
+
+  /*საბოლო მდგომარეობა*/
+  to{
+    opacity:1;  /*ელემენტი ხდება სრულად ხილული*/
+    transform:translateY(0);  /*ბრუნდება თავის ნორმალურ ადგილზე */
+  }
+
+}
+
+/*ტელეფონისა და ტაბლეტის დიზაინი*/
+@media(max-width:768px){
+
+  .navbar{
+    /*მობილურზე navbar ელემენტები ვერტიკალურად ლაგდება*/
+    flex-direction:column; 
+    gap:20px; /*ელემენდების შორის ქმნის დაშორებას*/
+    padding:20px;
+  }
+
+  .navbar nav{
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+
+  .hero h2{
+    font-size:35px;
+  }
+
+}
+
+
+/* LOGIN PAGE */
+/*login გვერდს ცენტრში ათავსებს.*/
+.auth-container{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:40px 20px;
+}
+
+/*მარცხენა და მარჯვენა მხარეებს გვერდიგვერდ აწყობს*/
+.row-login{
+  width:100%;
+  max-width:1000px;
+  display:flex;
+  overflow:hidden;
+  border-radius:25px;
+  background:rgba(0,0,0,0.85);
+  box-shadow:0 10px 30px rgba(0,0,0,0.6);
+  backdrop-filter:blur(10px);
+}
+
+
+/* LEFT SIDE 
+აქ არის: სათაური, აღწერა, სურათი
+გამოიყენება gradient ფონი.*/
+
+.login-left{
+  flex:1;
+  background:linear-gradient(
+    rgba(255, 0, 0, 0.4),
+    rgba(0,0,0,0.7)
+  );
+  padding:50px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.login-left h1{
+  font-size:45px;
+  color:rgb(206, 205, 205);
+  margin-bottom:20px;
+}
+
+.login-left p{
+  color:#c6c5c5;
+  line-height:1.7;
+  margin-bottom:30px;
+  font-size:18px;
+}
+
+.login-left img{
+  width:100%;
+  border-radius:20px;
+  object-fit:cover;
+}
+
+/* RIGHT SIDE შეიცავს: input, label, button */
+
+.login-right{
+  flex:1;
+  padding:60px 50px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.login-right h2{
+  font-size:40px;
+  margin-bottom:30px;
+  color:rgb(255, 0, 0);
+  text-align:center;
+}
+
+.login-right form{
+  display:flex;
+  flex-direction:column;
+}
+
+.login-right label{
+  margin-bottom:8px;
+  margin-top:15px;
+  color:white;
+}
+
+.login-right input{
+  padding:15px;
+  border:none;
+  border-radius:12px;
+  background:#000000;
+  color:rgb(255, 255, 255);
+  border:2px solid #333;
+  outline:none;
+  transition:0.3s;
+}
+/*input არჩევისას წითლდება.*/
+.login-right input:focus{
+  border-color:red;
+}
+
+.login-right button{
+  margin-top:25px;
+  padding:15px;
+  border:none;
+  border-radius:12px;
+  background:red;
+  color:white;
+  font-size:17px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+/*ღილაკი hover-ისას ოდნავ ზემოთ იწევა.*/
+.login-right button:hover{
+  background:darkred;
+}
+
+/*ლამაზებს ტექსდს*/
+.switch-text{
+  margin-top:20px;
+  text-align:center;
+  color:#ccc;
+}
+
+/*დაკლიკების დროს ლაამაზებს */
+.switch-text a{
+  color:red;
+  text-decoration:none;
+}
+
+/* RESPONSIVE: Login სექციები ქვემოთ-ქვემოთ ლაგდება */
+
+@media(max-width:900px){
+
+  .row-login{
+    flex-direction:column;
+  }
+
+  .login-left{
+    text-align:center;
+  }
+
+  .login-left h1{
+    font-size:35px;
+  }
+
+  .login-right{
+    padding:40px 30px;
+  }
+
+} 
+
+
+/*  AUTH / LOGIN / REGISTER */
+/* Login/Register - გვერდის შუაში იქნება */
+.auth-container{
+  width:100%;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:40px 20px;
+}
+
+/* Login/Register-ის წირითადი ნაწილი */
+.auth-box{
+  width:100%;
+  max-width:1100px;
+  background:rgba(0,0,0,0.75);
+  border-radius:25px;
+  overflow:hidden;
+  box-shadow:0 10px 40px rgba(0,0,0,0.6);  /*დამუკის ეფექდი*/
+  backdrop-filter:blur(12px);   /*უკან მდებარე ფონი ბლური იქნება*/
+  animation:fadeIn 1s ease; 
+}
+
+
+/* ROW LOGIN */
+.row-login{
+  display:flex;
+  flex-direction:row;
+}
+
+/* LEFT SIDE- ინფორმაცია ,სურათი, ტექსდისთვის*/
+.login-left{
+  flex:1;  /*მარჯვენა მხარეა იგივე ზომაზეა მარცხნისა  */
+  padding:50px;
+  background:linear-gradient(  /*წითლიდან სავში გადასვლის ეფექდი*/
+    rgba(255,0,0,0.4),
+    rgba(0,0,0,0.8)
+  );
+  display:flex; 
+  flex-direction:column;
+  justify-content:center;  /* ჰორიზონდალურად ალაგებს შიგნით ელემენდებს*/
+}
+
+.login-left h1{
+  font-size:45px;
+  margin-bottom:20px;
+  color:white;
+}
+
+.login-left p{
+  color:#ddd;
+  font-size:18px;
+  line-height:1.7;
+  margin-bottom:30px;
+}
+
+.login-left img{
+  width:100%;
+  height:320px;
+  object-fit:cover;
+  border-radius:20px;
+  box-shadow:0 5px 20px rgba(0,0,0,0.5);
+}
+
+/* RIGHT SIDE */
+.login-right{
+  flex:1;
+  padding:60px 50px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.login-right h2{
+  font-size:40px;
+  margin-bottom:30px;
+  color:red;
+  text-align:center;
+}
+
+/* FORM */
+.login-right form{
+  width:100%;
+}
+
+/*label არის ტექსტი input-ის ზემოთ*/
+.login-right label{
+  display:block;  /*label გადადის ცალკე ხაზზე*/
+  margin-bottom:8px;
+  margin-top:18px;
+  font-size:16px;
+  color:#ddd;
+}
+
+/*ამზადებს login ფორმის input ველებს email, password*/
+.login-right input{
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:12px;
+  background:#111;
+  color:white;
+  border:2px solid #333;
+  outline:none;   /*როცა დააკლიკებ input-ზე, ლურჯი ჩარჩო აღარ გამოჩნდება*/
+  transition:0.3s;
+  font-size:16px;
+}
+
+.login-right input:focus{  /*როცა input-ზე დააკლიკებ ან წერა დაიწყება წითლდება*/
+  border-color:red;
+  box-shadow:0 0 10px rgba(255,0,0,0.4);   /*input-ის გარშემო ჩნდება წითელი ნათება*/
+}
+
+/* BUTTON */
+.login-right button{
+  width:100%;
+  margin-top:30px;
+  padding:15px;
+  border:none;
+  border-radius:12px;
+  background:red;
+  color:white;
+  font-size:17px;
+  cursor:pointer;
+  transition:0.3s;
+  font-weight:bold;
+}
+
+.login-right button:hover{
+  background:darkred;
+  transform:translateY(-3px);
+}
+
+/* ეს CSS კოდი სტილიზაციას უკეთებს ტექსტს და ბმულს, რომელიც ჩვეულებრივ გამოიყენება ავტორიზაციის ფორმებში,ანუ ლოგინის და რეგისდრაცის გვერდებზე გაოიყენებს */
+.switch-text{
+  text-align:center;
+  margin-top:25px;
+  color:#ccc;
+}
+
+
+/*ეს სტილი მოქმედებს მხოლოდ .switch-text-ში არსებულ <a> ბმულზე*/
+.switch-text a{  
+  color:rgb(254, 65, 3);
+  text-decoration:none;
+  font-weight:bold;
+}
+
+.switch-text a:hover{  /*მუშაობს მაშინ, როცა მაუსი ბმულზეა მიტანილი*/
+  text-decoration:underline;  /*ბმულს დაემატება ქვედა ხაზი*/
+}
+
+/* RESPONSIVE დიზაინია ანუ ტელეფონში ფლაშედში გახსნისდროს */
+@media(max-width:900px){  /*თუ ეკრანის სიგანე 900px ან ნაკლებია, ქვემოთ მოცემული სტილები ამოქმედდება*/
+
+  /*ჩვეულებრივ ელემენტები შეიძლება გვერდიგვერდ იყოს,პატარა ეკრანზე ერთმანეთის ქვევით დალაგდება*/
+  .row-login{
+    flex-direction:column;
+  }
+
+  /*მარჯვენა მხრიდან დაშორება*/
+  .login-left{
+    padding:35px;
+  }
+
+  .login-right{   
+    padding:40px 30px;
+  }
+
+  /*მარცხენა მხარეს მთავარი სათაურის ზომა*/
+  .login-left h1{
+    font-size:32px;
+  }
+
+  /*მარჯვენა მხარეს სათაურის ზომა */
+  .login-right h2{
+    font-size:32px;
+  }
+
+
+  /*სურათის ზომა*/
+  .login-left img{
+    height:250px;
+  }
+
+}
+
+/*ეს ტელეფონისთვის არის*/
+@media(max-width:500px){
+
+  .login-left h1{
+    font-size:26px;
+  }
+
+
+/*მარჯვენა ნაწილი*/
+  .login-right{
+    padding:30px 20px;
+  }
+
+  /*Input-ის შიდა დაშორება*/
+  .login-right input{
+    padding:13px;
+  }
+/*ღილაკის დაშორება*/
+  .login-right button{
+    padding:13px; 
+  }
+
+}
+   
